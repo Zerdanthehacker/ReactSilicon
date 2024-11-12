@@ -1,0 +1,1341 @@
+/* Importerar Google Font Manrope */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* Definierar globala färger och standardvärden för paddings och övergångstid */
+:root {
+    --color-border-gray: #e2e5f1;
+    --color-dark: #0B0F19; /* Mörk färg används för text och bakgrund */
+    --color-primary: #6366F1; /* Primär färg, använd för länkar och knappar */
+    --color-gray: #9397AD; /* Grå färg för hover-effekter */
+    --color-white: #FFFFFF; /* Vit färg för text och bakgrunder */
+    --color-Gray-1: #E2E5F1; 
+
+    --container-padding: 1rem; /* Standard padding för containers */
+    --transition-time: all 0.2s; /* Övergångstid för animationer */
+}
+
+/* Ställer in boxmodell och tar bort tap highlight på mobila enheter */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+}
+
+/* Nollställer marginaler och padding för olika element */
+body, section, div, header, footer, main, aside, nav, blockquote, p, span {
+    margin: 0;
+    padding: 0;
+}
+
+/* Gör body till en flex-container som sträcker sig över hela höjden */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: "Manrope", sans-serif; /* Använder Google font */
+    font-optical-sizing: auto;
+    font-weight: 400; /* Normal vikt */
+    font-style: normal;
+    font-size: 16px; /* Standard fontstorlek */
+}
+
+/* Main tar upp all tillgänglig plats för att trycka ner footern */
+main {
+    flex: 1;
+}
+
+/* Container inställningar för layout */
+.container {
+    width: 100%;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Länkstandarder */
+a {
+    color: var(--color-primary); /* Primär färg på länkar */
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-primary);
+    text-decoration: underline; /* Understrykning vid hover */
+}
+
+/* Stil för navigationslänkar */
+.nav-link {
+    color: var(--color-dark); /* Mörk textfärg för navigationslänkar */
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+/* Aktiv länk stil */
+.active {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.btn-circle {
+    height: 44px;
+    width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 2px solid var(--color-border-gray);
+    background-color: var(--color-white);
+    color: var(--color-dark);
+}
+
+/* Primär knappstil */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white); /* Vit textfärg */
+    border-radius: 8px; /* Rundade hörn */
+    padding: 12px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+
+
+
+.btn-primary:hover {
+    background-color: var(--color-gray);
+    color: var(--color-white); /* Behåller vit textfärg vid hover */
+}
+
+/* Ikon stil inom primär knapp */
+.btn-primary i {
+    margin-right: 0.5rem; /* Mellanrum mellan ikon och text */
+}
+
+
+.btn-app {
+    display: inline-block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    color: var(--color-white);
+}
+
+.btn-app:hover {
+    transform: scale(1.05); /* Zoom-effekt vid hover */
+}
+
+.btn-app img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: filter 0.3s ease; /* Gör att färgändringen sker smidigt */
+}
+
+
+
+
+
+
+/* Switch stil - omkopplare för mörkt/ljusläge */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Gömmer den ursprungliga checkboxen */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider stil */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Standard bakgrundsfärg */
+    transition: .4s; /* Smooth transition */
+}
+
+/* Slider-boll som rör sig */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 0px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+/* Färgändring när checkboxen är ikryssad */
+input:checked + .slider {
+    background-color: var(--color-primary);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Flyttar bollen när aktiv */
+}
+
+/* Rundade kanter på switchen */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+.darkmode-container .label {
+    margin-right: 10px; /* Mellanrum mellan label och switch */
+    display: none; /* Dölj label på mindre skärmar */
+}
+
+/* Dölj navbar och inloggningsknapp som standard */
+.navbar, #auth-signin {
+    display: none;
+}
+
+
+/* Layout för header */
+header .container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto auto;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Footer stil */
+footer {
+    font-size: 14px;
+    background-color: #f5f5f5;
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+footer .copyright, footer .credit {
+    color: var(--color-dark);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+
+
+/* Media queries för skärmar bredare än 768px */
+@media(min-width: 768px) {
+    footer .copyright {
+        display: block;
+    }
+
+    footer .credit {
+        display: none;
+    }
+
+    .container {
+        max-width: 720px;
+    }
+
+    footer .container {
+        display: flex;
+        align-items: center;;
+        justify-content: center;
+    }
+
+
+    
+
+    .darkmode-container .label {
+        display: block; /* Visa label på större skärmar */
+    }
+
+    header .container {
+        grid-template-columns: 1fr auto auto;
+    }
+
+    .navbar, #auth-signin {
+        display: none; /* Visa navbar och auth sign in på större skärmar */
+    }
+
+    .btn-mobile {
+        display: block; /* Dölj mobilknapp på större skärmar */
+    }
+
+
+
+    #brands {
+        display: block;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        margin: 0;
+    }
+
+    #brands .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    #brand-5, #brand-6 {
+        display: none;
+    }
+
+
+}
+
+
+
+
+
+/* Invertera bilden i Dark Mode */
+.dark-mode .brand-box {
+    filter: invert(0.8);
+}
+
+
+
+
+
+
+
+
+
+
+/* Stil för brand-box */
+.brand-box  {
+    border: 8px solid var(--color-border-gray);
+    border: 1px;
+    height: 100px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px;
+}
+
+
+
+#brand-6 {
+    align-self: center;
+}
+
+/* Mobilknappstil för mindre skärmar */
+.btn-mobile {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+@media (min-width: 1400px) {
+    #auth-signin {
+        display: block;
+    }
+
+    header .container {
+        display: flex;
+        justify-content: space-between; 
+    }
+    
+    .navbar {
+        display: flex;
+        margin-left: -35rem; 
+    }
+    
+    .darkmode-container {
+        align-items: center;
+        margin-right: -35rem;
+        }
+    
+    
+}
+
+
+@media (min-width: 1400px) {
+    .container {
+      max-width: 1320px;
+    }
+  
+    header .container {
+        gap: rem;
+        grid-template-columns: 1fr auto auto;
+     }
+     
+  
+    .navbar {
+      display: block;
+    }
+  
+    #auth-signin {
+      display: block;
+    }
+  
+    .btn-mobile {
+      display: none;
+    }
+    #brand-5, #brand-6 {
+      display: block;
+    }
+
+}
+
+
+.subscribe-button {
+    display: grid;
+    place-items: center;
+}
+
+.btn-group {
+    display: flex;
+
+    .btn-input {
+        border-radius: .4em 0 0 .4em;
+    }
+    .sbc-btn {
+        border-radius: 0 .4em .4em 0;
+    }
+
+}
+.btn-input {
+    border: 1px solid rgb(204, 204, 204);
+    font-size: 25px;
+    padding: .3em;
+
+    border-radius: .5em;
+
+}
+.sbc-btn {
+    background-color: #6366F1;
+    color: white;
+    padding: .8em 2em;
+    border: 0;
+    font-size: 1rem;
+
+    border-radius: .5em;
+}
+
+.sbc-container {
+    display: flex;
+    gap: 5rem;
+    
+}
+
+.sbc-text {
+    font-size: 13px;
+    display: flex;
+}
+
+.sbc-
+
+
+
+
+
+
+
+.sbc-icon {
+    position: absolute;
+    padding-left: 22px;
+    padding-top: 11px;
+}
+
+.email {
+    padding-left: 3rem;
+    font-size: 16px;
+
+}
+
+
+
+
+
+/* Media queries för skärmar mindre än 767px */
+@media(max-width: 767px) {
+    #auth-signin, .navbar {
+        display: none; /* Dölj navbar och auth sign in på små skärmar */
+    }
+
+    .btn-mobile {
+        display: block; /* Visa mobilknapp på små skärmar */
+    }
+
+    #brand-1, #brand-2 {
+        display: none;
+    }
+
+    #brands {
+        display: none;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    #brands .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+
+    footer .credit {
+        display: none;
+    }
+
+    
+
+    .darkmode-container {
+        justify-self: end; /* Justera mörkt läge switch till höger */
+    }
+
+}
+
+
+
+/* Hero Light Mode */
+#hero {
+    background: rgb(99, 102, 241);
+    background: linear-gradient(0deg, rgb(25, 25, 53) 0%, rgba(99, 102, 241, 0.1) 42%);
+    padding-bottom: 3rem;
+    overflow: hidden;
+}
+
+.discover-more-p {
+    span {
+        color: white;
+    }
+}
+
+
+
+
+
+    
+    .container {
+
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr;
+        grid-template-areas: "headline"
+                             "content";
+
+        @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "headline headline"
+                             "content images";
+    }
+
+        @media (min-width: 1400px) {
+        gap: 3rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "headline images"
+                             "content images";
+    }
+
+}
+
+
+    .headline {
+        grid-area: headline;
+        text-align: center;
+
+        h1 {
+            font-size: 34px;
+            font-weight: 800;
+
+            @media (min-width: 768px) {
+                font-size: 56px;
+            }
+            @media (min-width: 1400px) {
+                text-align: left;
+            }
+        }
+
+    }
+
+    .content {
+        grid-area: content;
+        text-align: center;
+
+        @media (min-width: 768px) {
+            text-align: left;
+        }
+
+
+        p {
+            font-size: 18px;
+            margin-bottom: 3rem;
+
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            @media (min-width: 1400px) {
+                flex-direction: row;
+
+            }
+
+        }
+
+        .discover-more {
+            color: var(--color-dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+
+            @media (min-width: 768px) {
+                justify-content: flex-start;
+                margin-bottom: 2rem;
+            }
+            @media (min-width: 1400px) {
+                margin-top: 10rem;
+            }
+    
+        }
+
+    }
+
+    .images {
+        position: relative;
+        grid-area: images;
+        display: none;
+
+        @media (min-width: 768px) {
+            display: block;
+        }
+
+        .img-back {
+            position: absolute;
+            z-index: -10;
+            bottom: -70px; /* Flyttar bilden nedåt */
+            right: 50px;
+            width: 70%;
+            height: auto;
+
+            @media (min-width: 1400px) {
+                width: auto;
+            }
+        }
+        
+        .img-front {
+            position: absolute;
+            z-index: 10;
+            bottom: -50px; /* Flyttar bilden nedåt */
+            right: -50px;
+            width: 70%;
+            height: auto;
+
+            @media (min-width: 1400px) {
+                width: auto;
+                bottom: -100px;
+                right: -180px
+            }
+        }
+        
+
+
+
+    }
+
+    
+
+
+
+
+
+
+    /* Features Section Styling */
+.features-section {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    align-items: center;
+    row-gap: 2rem;
+    gap: 0;
+    padding-top: 4rem;
+    margin: 0;
+    padding: 0;
+    padding-top: 10rem;
+}
+
+.features-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-features {
+    margin-top: 2rem;
+}
+
+.features-rubrik {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.feature-item img {
+    width: 50px;
+    height: auto;
+}
+
+.feature-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    justify-content: center;
+    margin: 0;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-rubrik {
+        margin-bottom: 1rem;
+    }
+    
+    .mobile-features {
+        margin-left: 0;
+        margin-top: 3rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .features-section {
+        gap: 3rem;
+    }
+    
+    .features-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+
+    
+
+    .transactions {
+        margin: 0;
+        padding: 0;
+    }
+
+    
+
+
+   .transaction-header {
+    text-align: center;
+    font-size: xx-large;
+    padding-top: 2rem;
+   }
+
+   .transaction-img {
+    align-items: center;
+   }
+
+   .transactions img {
+    margin: 0 50px;
+}
+
+
+   .transaction-h4 {
+    text-align: center;
+    font-size: x-large;
+    padding-bottom: 10rem;
+   }
+
+   .transactions {
+    text-align: center;
+   }
+
+
+   .transaction {
+    margin-top: 10rem;
+    background-color: #F3F6FF;
+    color: black;
+   }
+
+   .dark-mode .transaction {
+    background-color: #565973;
+    color: white;
+}
+
+
+
+   .simple-transfer-text {
+    margin-top: 10rem;
+    margin-left: 10rem;
+
+    
+   }
+
+   .checkmark-text  {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem;
+    padding-right: 2rem;
+    margin-top: 2rem;
+    flex-wrap: nowrap; /* Tvingar innehållet att hålla sig på samma rad */
+
+    i {
+        color: var(--color-primary);
+    }
+}
+
+.simple-btn {
+    padding-top: 2rem;
+}
+
+.simple-btn-2 {
+    margin-bottom: 7rem;
+}
+
+
+.simple-btn-2:hover {
+    filter: brightness(1.2); 
+    transition: filter 0.3s ease;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+    .simple-transfer {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        
+       }
+
+       .simple-transfer-img {
+        margin-left: 15rem;
+        margin-top: 6rem;
+       }
+
+       .checkmark-text p {
+        white-space: nowrap; /* Tvingar texten att ligga på samma rad */
+    }
+    
+
+    .recieve-payments-text {
+        display: grid;
+    }
+
+    .recieve-payments {
+        margin-left: 12rem;
+    }
+
+    .reciever-container {
+        display: flex;
+        gap: 3rem;
+        margin-left: 10rem;
+    }
+
+    .simple-btn:hover {
+        filter: brightness(1.2); 
+        transition: filter 0.3s ease;
+        cursor: pointer;
+    }
+
+    .reciever p {
+        margin-top: 15px;
+    }
+
+
+    .review-container {
+        margin-left: 35rem;
+        display: flex;
+        gap: 5rem;
+
+    }
+
+
+
+    .review {
+        padding-top: 5rem;
+        background-color: var(--color-Gray-1);
+        padding-bottom: 5rem;
+        padding-left: 17rem;
+    }
+
+    
+
+
+
+    .review-header {
+        font-size: x-large;
+    }
+
+    .review-header h1 {
+        margin-left: -10rem;
+    }
+
+    
+
+
+    .box {
+        display: flex;
+        gap: 3rem;
+        margin-top: 2rem;
+    }
+
+    .question-box p {
+        padding-bottom: 30px
+    }
+
+
+    .question-box-2 p {
+        padding-bottom: 30px;
+    }
+    
+    .question-box img {
+        padding-bottom: 30px;
+    }
+    .question-box-2 img {
+        padding-bottom: 30px;
+    }
+
+
+    .question-box, .question-box-2  {
+        border: 1px solid var(--color-Gray-1);
+        border-radius: 0.5rem;
+    }
+
+    .contact-button .light-button .dark-mode {
+        color: #0B0F19;
+    }
+
+
+    .question-box {
+        button {
+            color: var(--color-primary);
+        }
+    }
+    .question-box-2 {
+        button {
+            color: #22c55e;
+        }
+    }
+
+    .question-box .dark-mode {
+        background-color: black;
+    }
+    
+    
+
+
+    .questions {
+        padding-top: 5rem;
+        padding-left: 5rem;
+    }
+
+
+    .box {
+        button {
+            border: none;
+            background-color: white;
+            padding-left: 20px;
+            padding-bottom: 15px;
+        }
+
+        img {
+            padding-left: 20px;
+            padding-top: 20px;
+        }
+
+        p {
+            padding: 20px;
+        }
+    }
+
+
+
+
+    .faq {
+        
+        
+
+        h2 {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: xx-large;
+        }
+        p {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: var(--color-gray);
+        }
+    }
+
+    .faq {
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+
+    .faq-box {
+        margin: 3rem;
+        margin-left: 75rem;
+        margin-right: 32rem;
+        border: 1px solid var(--color-Gray-1);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        align-items: center;
+        border-radius: 0.5rem;
+
+        h3 {
+            margin: 15px;
+            margin-top: -5px;
+        }
+
+        p {
+            margin: 15px;
+        }
+
+    }
+
+
+
+
+    .faq-box {
+
+        img {
+            padding-top: 10px;
+        }
+    }
+
+
+    .FAQ {
+        margin-top: -500px;
+        margin-right: 5rem;
+
+        
+
+        h3 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            margin-right: 1.5rem;
+        }
+
+    }
+
+    .faq-3 {
+
+        img {
+            margin-left: 2rem;
+        }
+
+    }
+
+
+    
+    .wrapper {
+        height: 100svh;
+        display: grid;
+        place-items: center;
+    }
+
+    .btn {
+        background-color: var(--color-primary);
+        color: white;
+        padding: .8em 2em;
+        border: 0;
+        font-size: 1rem;
+
+        border-radius: .5em;
+
+    }
+
+    /* Hover effect for Subscribe button */
+.btn:hover {
+    box-shadow: 0px 4px 12px rgba(35, 34, 34, 0.915);
+    transform: scale(1.20);
+    transition: var(--transition-time); 
+    filter: invert(1.05);
+  }
+
+
+  
+
+
+    .form-input {
+        border: 1px solid #747474;
+        font-size: 1rem;
+        padding: .3em;
+
+        border-radius: .5em;
+    }
+
+    .input-group {
+        display: flex;
+
+        .form-input {
+            border-radius: .5em 0 0 .5em;
+        }
+
+        .btn {
+            border-radius: 0 .5em .5em 0;
+        }
+    }
+
+    .input-group {
+        position: relative;
+        margin-right: 7rem;
+    }
+
+    .icon {
+        position: absolute;
+        top: 50%;
+        left: .5rem;
+
+        transform: translateY(-50%);
+    }
+
+    .form-input {
+        padding-left: 2rem;
+    }
+
+    .wrapper {
+        display: flex;
+        place-items: center;
+        background-color: #1c1e31;
+        border: 0px solid var(--color-Gray-1); 
+        padding: 2rem; 
+        gap: 20rem;
+        border-radius: .5em; 
+        height: auto; 
+        width: fit-content; 
+        margin: 0 auto;
+    }
+
+
+    .footer-wrapper {
+        margin-top: 10rem;
+    }
+    
+
+    .bell {
+        display: flex;
+        gap: 2rem;
+    }
+
+
+    .brands {
+        margin-top: 2rem;
+
+    }
+
+    .brand-box-6 {
+        margin-top: 15px;
+    }
+
+    
+
+
+
+
+.navbar .nav-link {
+  color: inherit;
+  text-decoration: none;
+  margin-right: 20px; 
+}
+
+.btn-primary {
+  background-color: #6366F1;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+
+
+.label {
+  margin-right: 10px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+input:checked + .slider {
+  background-color: #4A90E2;
+}
+
+
+.navbar {
+    margin-left: 10px;
+}
+
+.btn-toggle-switch {
+    margin-left: 40rem;
+}
+
+
+
+
+body.dark-mode {
+    background-color: #121212; 
+    color: #ffffff;
+}
+
+
+
+body.dark-mode .review {
+    background-color: #33354D; 
+    color: #fff; 
+}
+
+body.dark-mode .review-header h1 {
+    color: #fff; 
+}
+
+
+
+
+
+.recieve-payments {
+    margin-right: 5rem;
+}
+  
+.recieve-payment-container {
+    display: flex;
+    margin-left: 10rem;
+
+}
+
+.receive-payments-text {
+    flex-grow: 1;
+    white-space: nowrap; /* Förhindrar att texten radbryts */
+}
+.receiver {
+    display: flex; /* Placerar ikon och text i en rad */
+    align-items: center; /* Centrerar ikon och text vertikalt */
+    gap: 1rem; /* Lägger till utrymme mellan ikon och text */
+    margin: 2rem;
+}
+
+.receive-payments-header {
+    margin-left: 2rem;
+}
+
+.simple-btn-2 {
+    margin-left: 2rem;
+}
+
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 30rem;
+  }
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+
